@@ -26,6 +26,7 @@ function getElems(){
         elems[i].nodeValue = trim(elems[i].nodeValue)
         if(elems[i].nodeValue !== ''){
             translateData = translate(elems[i])
+
             if(Object.getOwnPropertyNames(translateData).length>1)
             emptyArray.push( translateData );
         };
@@ -35,22 +36,25 @@ function getElems(){
 
 // 序列化翻译数据
 function translate(elm,langData){
-    langData = langData||{}
+    langData = langData||{};
 
-    var name = 'default',value=elm.nodeValue
-    if(elm.nodeType === 8){
+    var name = 'lang-default',value=elm.nodeValue,
+        fragmentRE = /^\{\w+\}/;
+
+    if(elm.nodeType === 8 && fragmentRE.test(value)){
         // 获取花括号内容
-        name = value.match(/^\{\w+\}/)[0];
+        name = value.match(fragmentRE)[0];
         // 去掉花括号
-        name = 'lang-' + (name?name.replace(/\{([^\ ]*)\}/g, "'$1'"):'');
+        name = 'lang-' + (name?name.replace(/\{([^\ ]*)\}/g, "$1"):'');
         // 获取好括号后面的内容
-        value = value.replace(/^\{\w+\}/,"")
-
+        value = value.replace(fragmentRE,"")
+        if(trim(value) !== '') langData[name] = value;
     }
 
-    if(trim(value) !== '') langData[name] = value;
+    if(trim(value) !== '' && !langData['lang-default']) langData[name] = value;
+
     var nextElm = elm.nextSibling;
-    if(nextElm) translate(elm.nextSibling,langData);
+    if(nextElm&&nextElm.nodeType !== 1) translate(elm.nextSibling,langData);
     return langData;
 }
 
