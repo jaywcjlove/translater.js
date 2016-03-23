@@ -1,24 +1,57 @@
 var Translate = function(option,callback){
     // 默认给URL参数 ?lang=en
-    this.lang_key = (option && option.lang) || 'lang';
+    this.lang_name = (option && option.lang) || 'default';
     // 回调函数
     this.callback = callback || function(){};
     this.langs = getElems() || []
 }
+
+Translate.prototype = {
+    setLang:function(name){
+        console.log('name::',name)
+    }
+}
+
 // 获取所有节点里面的注释信息
 // 返回一个数组
 function getElems(){
-    var str = document.getElementById("box").innerHTML;
-    var str1 = str.replace(/<.*>(.*)<.*>/i,"$1"); 
-    var str2 = str.replace(/^.*<!--(.*)-->.*$/,"$1");
-
+    // var str = document.getElementById("box").innerHTML;
+    // var str1 = str.replace(/<.*>(.*)<.*>/i,"$1"); 
+    // var str2 = str.replace(/^.*<!--(.*)-->.*$/,"$1");
     var elems = getTextNodes(document);
+    var emptyArray = [];
+    var translateData = new Object()
+    // console.log("elems::",elems);
     for (var i = 0; i < elems.length; i++) {
         elems[i].nodeValue = trim(elems[i].nodeValue)
         if(elems[i].nodeValue !== ''){
-            console.log("=="+i,elems[i]);
+            translateData = translate(elems[i])
+            if(Object.getOwnPropertyNames(translateData).length>1)
+            emptyArray.push( translateData );
         };
     }
+    return emptyArray;
+}
+
+// 序列化翻译数据
+function translate(elm,langData){
+    langData = langData||{}
+
+    var name = 'default',value=elm.nodeValue
+    if(elm.nodeType === 8){
+        // 获取花括号内容
+        name = value.match(/^\{\w+\}/)[0];
+        // 去掉花括号
+        name = 'lang-' + (name?name.replace(/\{([^\ ]*)\}/g, "'$1'"):'');
+        // 获取好括号后面的内容
+        value = value.replace(/^\{\w+\}/,"")
+
+    }
+
+    if(trim(value) !== '') langData[name] = value;
+    var nextElm = elm.nextSibling;
+    if(nextElm) translate(elm.nextSibling,langData);
+    return langData;
 }
 
 //过滤左右的空格以及换行符
@@ -26,27 +59,30 @@ function trim(text) {
     return "" + (null == text ? "" : (text + "").replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "").replace(/[\r\n]+/g,""));
 }
 
-//兼容的获取简单方案
+//兼容的获取文本节点的简单方案
 var getTextNodes = window.NodeFilter?function(e){
     //支持TreeWalker的浏览器
     var r=[],o,s;
     s=document.createTreeWalker(e,NodeFilter.SHOW_TEXT,null,null);
-    while(o=s.nextNode())r.push(o); //遍历迭代器
+    while(o=s.nextNode()){
+      if(o.parentElement.tagName !== 'SCRIPT') {
+          r.push(o); //遍历迭代器
+      }
+    }   
     return r;
 }:function(e){
     //不支持的需要遍历
     switch(e.nodeType){
-      case 3:return [e]; //注释节点直接返回
-      case 1:case 9: //文档或元素需要遍历子节点
+      //注释节点直接返回
+      case 3:return [e]; 
+      case 1:;case 9: 
+        //文档或元素需要遍历子节点
         var i,s=e.childNodes,result=[];
-        for(i=0;i<s.length;i++) //递归每个子节点
-          getTextNodes(s[i]) && result.push(getTextNodes(s[i]));
-        return Array.prototype.concat.apply([],result); //合并子数组
+        if(e.tagName!=='SCRIPT'){
+            for(i=0;i<s.length;i++)
+            getTextNodes(s[i]) && result.push(getTextNodes(s[i]));
+            //合并子数组   
+            return Array.prototype.concat.apply([],result); 
+        }
     };
 };
-
-Translate.prototype = {
-    setLang:function(name){
-        console.log('dd')
-    }
-}
