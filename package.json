@@ -1,0 +1,27 @@
+{
+  "name": "translate.js",
+  "version": "1.0.0",
+  "description": "Simple translation tools.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.maiyamall.com/wangchujiang/translate.js.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-umd": "^0.2.0",
+    "gulp-watch": "^4.3.5"
+  },
+  "dependencies": {
+    "gulp-uglifyjs": "^0.6.2"
+  }
+}

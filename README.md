@@ -6,5 +6,9 @@
 例如：
 
 ```html
-<div>这里是中文<!--{jp}ここは日本語です--><!--{en}Here is English--></div>
+<div>
+    这里是中文
+    <!--{jp}ここは日本語です-->
+    <!--{en}Here is English-->
+</div>
 ```

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple translation tools.</title>
+</head>
+<body>
+
+<div id="box">
+    这里是中文
+    <!--{jp}ここは日本語です-->
+    <!--{en}Here is English-->
+    <div>
+        2.这里是中文
+        <!--{jp}2.ここは日本語です-->
+        <!--{en}Here is English-->
+    </div>
+</div>
+<script src="../dist/translate.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    
+var tran = new Translate();
+console.log('tran:',tran)
+
+
+</script>
+    
+</body>
+</html>
