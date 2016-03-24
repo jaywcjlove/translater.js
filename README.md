@@ -16,3 +16,9 @@ var tran = new Translater();
 tran.setLang('jp')
 </script>
 ```
+
+# 作为模块安装
+
+```bash
+$ npm install translater.js
+```
