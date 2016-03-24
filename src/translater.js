@@ -3,7 +3,9 @@ var Translater = function(option,callback){
     this.lang_name = (option && option.lang) || 'default';
     // 回调函数
     this.callback = callback || function(){};
-    this.langs = getElems() || []
+    this.langs = getElems() || [];
+
+    if(option.lang !== 'default') this.setLang(option.lang);
 }
 
 Translater.prototype = {
