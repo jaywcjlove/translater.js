@@ -1,5 +1,5 @@
 {
-  "name": "translate.js",
+  "name": "translater",
   "version": "1.0.0",
   "description": "Simple translation tools.",
   "main": "index.js",

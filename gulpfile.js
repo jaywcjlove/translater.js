@@ -14,10 +14,10 @@ gulp.task('build', function () {
     gulp.src('src/*.js')
         .pipe(umd({
             exports: function(file) {
-                return 'Translate';
+                return 'Translater';
             },
             namespace: function(file) {
-                return 'Translate';
+                return 'Translater';
             }
         }))
 //        .pipe(uglify())

@@ -1,13 +1,4 @@
-;(function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    define([], factory);
-  } else if (typeof exports === 'object') {
-    module.exports = factory();
-  } else {
-    root.Translate = factory();
-  }
-}(this, function() {
-var Translate = function(option,callback){
+var Translater = function(option,callback){
     // 默认给URL参数 ?lang=en
     this.lang_name = (option && option.lang) || 'default';
     // 回调函数
@@ -15,7 +6,7 @@ var Translate = function(option,callback){
     this.langs = getElems() || []
 }
 
-Translate.prototype = {
+Translater.prototype = {
     setLang:function(name){
         var langs = this.langs;
         this.lang_name = name;
@@ -39,7 +30,7 @@ function getElems(){
     for (var i = 0; i < elems.length; i++) {
         elems[i].nodeValue = trim(elems[i].nodeValue)
         if(elems[i].nodeValue !== ''){
-            translateData = translate(elems[i])
+            translateData = translater(elems[i])
 
             if(Object.getOwnPropertyNames(translateData).length>2)
                 emptyArray.push( translateData );
@@ -49,7 +40,7 @@ function getElems(){
 }
 
 // 序列化翻译数据
-function translate(elm,langData){
+function translater(elm,langData){
     langData = langData||{};
 
     var name = 'lang-default',value=elm.nodeValue,
@@ -72,7 +63,7 @@ function translate(elm,langData){
 
     var nextElm = elm.nextSibling;
     if(nextElm&&nextElm.nodeType !== 1){
-        translate(nextElm,langData)
+        translater(nextElm,langData)
     };
     return langData;
 }
@@ -110,5 +101,3 @@ var getTextNodes = window.NodeFilter?function(e){
         }
     };
 };
-return Translate;
-}));
