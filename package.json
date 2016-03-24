@@ -2,7 +2,7 @@
   "name": "translater.js",
   "version": "1.0.0",
   "description": "Simple translation tools.",
-  "main": "index.js",
+  "main": "dist/translater.min.js",
   "directories": {
     "test": "test"
   },
