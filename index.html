@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple translation tools.<!--{cn} 简单的翻译工具--></title>
+    <style type="text/css">
+    body,html,ul,li{margin: 0;padding: 0;font-size: 14px; }
+    body,html{height: 100%;font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",SimSun,sans-serif;}
+    table{height: 100%;width: 100%;}
+    a{text-decoration: none;}
+    header{
+        background-color: #409D76;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        color: #fff;
+    }
+    .header h1{font-size: 55px;margin: 0 0 20px 0;}
+    .header h1 span{font-size: 55px;color: #17533A;font-weight: bold;;}
+    .btn {
+        display: inline-block;
+        padding: 4px 15px;
+        cursor: pointer;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        user-select: none;
+        background-image: none;
+        border-radius: 4px;
+        margin: 0 5px;
+
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;
+        transition: all .3s ease;
+    }
+    .btn:hover{
+        background: #216F4E;
+        color: #fff;
+    }
+    .btn:active{
+        background: #323232;
+        color: #fff;
+    }
+    .describe{
+        padding: 30px 15px;
+        max-width: 500px;
+        margin: 0 auto;
+        line-height: 23px;
+    }
+    .fork-github {position: absolute; right: 0; top: 0;z-index: 9;}
+    </style>
+</head>
+<body>
+
+<div class="fork-github">
+<a target="_blank" href="https://github.com/jaywcjlove/translate.js"><img src="forkmeongithub.png"></a>
+</div>
+
+<header>
+<table class="header">
+    <tbody>
+        <tr>
+            <td>
+    <h1>Translate<span>.JS</span></h1>
+    <div>
+        <a class="btn" href="javascript:tran.setLang('default');">English</a><a 
+        class="btn" href="javascript:tran.setLang('jp');">日本語</a><a 
+        class="btn" href="javascript:tran.setLang('cn');">中文</a> 
+    </div>
+                
+    <div class="describe">
+        This is a use of HTML comments page translation solution. For a small amount of static pages, this solution is more simple.
+        <!--{jp}これはHTML注釈のページの翻訳の解決方案を利用します。少量の静的なページに対して、この解決方案はもっと簡単です。-->
+        <!--{cn}这是一个利用HTML注释的页面翻译解决方案。对于少量的静态页面，这种解决方案显得更简单。-->
+    </div> 
+            </td>
+        </tr>
+    </tbody>
+</table> 
+
+</header>
+
+
+<script type="text/javascript" src="https://cdn.rawgit.com/jaywcjlove/translate.js/master/dist/translate.min.js"></script>
+<script type="text/javascript">
+    var tran = new Translate();
+</script>
+
+</body>
+</html>
