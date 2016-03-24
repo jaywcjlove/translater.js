@@ -20,7 +20,8 @@ gulp.task('build', function () {
                 return 'Translater';
             }
         }))
-//        .pipe(uglify())
+        .pipe(gulp.dest('./dist'))
+        .pipe(uglify())
         .pipe(rename({suffix:".min"})) 
         .pipe(gulp.dest('./dist'));
 
