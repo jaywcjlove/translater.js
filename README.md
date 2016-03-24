@@ -1,9 +1,8 @@
 # translate.js
 
-设计这个翻译思路，解决一些需要翻译的文字被写到 `js` 中。利用 `HTML` 注释来添加不同的语言种类。很显然这个翻译方法是很愚蠢的，如果有后端，翻译变得很简单的事情。
-对于单个临时翻译的页面使用。
+这是一个利用HTML注释的翻译页面解决方案。如果放到后端那是最佳解决方案，对于少量的静态页面，这种解决方案显得更简单。
 
-例如：
+如此简单：
 
 ```html
 <div>
@@ -11,4 +10,9 @@
     <!--{jp}ここは日本語です-->
     <!--{en}Here is English-->
 </div>
+<script src="../dist/translate.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+var tran = new Translate();
+tran.setLang('jp')
+</script>
 ```
