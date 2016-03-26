@@ -13,8 +13,13 @@ Translater.prototype = {
         var langs = this.langs;
         this.lang_name = name;
         for (var i = 0; i < langs.length; i++) {
-            if(langs[i]['lang-'+name]) 
-                langs[i].element.nodeValue = langs[i]['lang-'+name];
+            if(langs[i]['lang-'+name]){
+                if(langs[i].element.tagName==='TITLE'){
+                    langs[i].element.innerHTML = langs[i]['lang-'+name];
+                }else{
+                    langs[i].element.nodeValue = langs[i]['lang-'+name];
+                }
+            }
         }
     }
 }
@@ -27,8 +32,7 @@ function getElems(){
     // var str2 = str.replace(/^.*<!--(.*)-->.*$/,"$1");
     var elems = getTextNodes(document);
     var emptyArray = [];
-    var translateData = new Object()
-    // console.log("elems::",elems);
+    var translateData = new Object();
     for (var i = 0; i < elems.length; i++) {
         elems[i].nodeValue = trim(elems[i].nodeValue)
         if(elems[i].nodeValue !== ''){
@@ -41,9 +45,31 @@ function getElems(){
     return emptyArray;
 }
 
+// 处理title里面的语言切换情况
+function serializeTitle(elm){
+    var data = {},value = elm.nodeValue,i=0;
+    data.element = elm.parentElement;
+    data['lang-default'] = value.replace(/<!--(.*)-->.*/,"");
+    value && (value = elm.nodeValue.match(/<!--\{\w+\}[\s\S]*?-->/gi) );
+    if(value && value.length>0){
+        for (; i < value.length; i++) {
+            var name = value[i].match(/\{([^\ ]*)\}/)[0];
+            name = name.replace(/\{([^\ ]*)\}/g, "$1");
+            data['lang-' + name] = value[i].replace(/<!--\{\w+\}(.*)-->/g,'$1');
+        }
+    }
+    elm.parentElement.innerHTML = data['lang-default'];
+    return data;
+}
+
 // 序列化翻译数据
 function translater(elm,langData){
     langData = langData||{};
+
+    // 处理title里面的语言切换情况
+    if(elm.parentElement&&elm.parentElement.tagName === 'TITLE'){
+        return serializeTitle(elm)
+    }
 
     var name = 'lang-default',value=elm.nodeValue,
         fragmentRE = /^\{\w+\}/;
