@@ -92,8 +92,7 @@ function serializeIMG(elm){
     if(imgurl && imgurl.length>0){
         for (; i < imgurl.length; i++) {
             var name = imgurl[i].replace(/data-lang-+(.*)+=\"([^\ ]*)\"/g, "$1");
-            var value = imgurl[i].match(/data-lang-+(.*)+=\"(.*?)\"/)[2]
-            console.log("value:",imgurl[i],value);
+            var value = imgurl[i].match(/data-lang-+(.*)+=\"(.*?)\"/)[2];
             data['lang-' + name] = value;
         }
     }
@@ -145,9 +144,11 @@ function trim(text) {
 var getImgNodes = function(e){
     var i=0,result = [],imgs = e.getElementsByTagName('IMG');
     for (; i < imgs.length; i++) {
+        var img_match = imgs[i].outerHTML.match(/data-lang-.(\w+).\".*?\"/g);
         if(imgs[i]
             &&imgs[i].nodeType === 1 
-            &&imgs[i].outerHTML.match(/data-lang-.(\w+).\".*?\"/g).length>0
+            &&img_match
+            &&img_match.length>0
         ){
             result.push(imgs[i])
         }
