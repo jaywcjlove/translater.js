@@ -88,18 +88,14 @@ function serializeIMG(elm){
     imgurl = htmlstr.match(/src=\"(.*?)\"/);
     data.element = elm;
     data['lang-default'] = imgurl.length===2?imgurl[1]:'';
-    imgurl = htmlstr.match(/data-lang-.(\w+).\".*?\"/g)
-    console.log(imgurl);
+    imgurl = htmlstr.match(/data-lang-.(\w+).\".*?\"/g);
     if(imgurl && imgurl.length>0){
         for (; i < imgurl.length; i++) {
-            console.log(imgurl,"1");
             var name = imgurl[i].match(/data-lang-(.*?)=/, "$1")[1];
-            console.log(imgurl,"2",name);
             var value = imgurl[i].match(/data-lang-(.*?)=\"(.*?)\"/, "$1")[2];
             data['lang-' + name] = value;
         }
     }
-    console.log(imgurl,"3");
     return data;
 }
 
