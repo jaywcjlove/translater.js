@@ -71,11 +71,11 @@ function serializeIMG(elm){
     imgurl = htmlstr.match(/src=\"(.*?)\"/);
     data.element = elm;
     data['lang-default'] = imgurl.length===2?imgurl[1]:'';
-    imgurl = htmlstr.match(/data-lang-.(\w+).\".*?\"/g)
+    imgurl = htmlstr.match(/data-lang-.(\w+).\".*?\"/g);
     if(imgurl && imgurl.length>0){
         for (; i < imgurl.length; i++) {
-            var name = imgurl[i].replace(/data-lang-+(.*)+=\"([^\ ]*)\"/g, "$1");
-            var value = imgurl[i].match(/data-lang-+(.*)+=\"(.*?)\"/)[2];
+            var name = imgurl[i].match(/data-lang-(.*?)=/, "$1")[1];
+            var value = imgurl[i].match(/data-lang-(.*?)=\"(.*?)\"/, "$1")[2];
             data['lang-' + name] = value;
         }
     }
@@ -146,7 +146,9 @@ var getTextNodes = window.NodeFilter?function(e){
     s=document.createTreeWalker(e,NodeFilter.SHOW_TEXT,null,null);
     while(o=s.nextNode()){
       if(o.parentElement.tagName !== 'SCRIPT' 
-        && o.parentElement.tagName !== 'STYLE') {
+        && o.parentElement.tagName !== 'STYLE'
+        && trim(o.nodeValue) !== ''
+        ) {
           r.push(o); //遍历迭代器
       }
     }   
@@ -159,7 +161,7 @@ var getTextNodes = window.NodeFilter?function(e){
       case 1:;case 9: 
         //文档或元素需要遍历子节点
         var i,s=e.childNodes,result=[];
-        if(e.tagName!== 'SCRIPT' && e.tagName!== 'STYLE'){
+        if(e.tagName!== 'SCRIPT' && e.tagName!== 'STYLE' && trim(o.nodeValue) !== ''){
             for(i=0;i<s.length;i++)
             getTextNodes(s[i]) && result.push(getTextNodes(s[i]));
             //合并子数组   
