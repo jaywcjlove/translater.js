@@ -10,27 +10,29 @@ var Translater = function(option,callback){
 
 Translater.prototype = {
     setLang:function(name){
-        var langs = this.langs;
+        var langs = this.langs,method='';
         this.lang_name = name;
         for (var i = 0; i < langs.length; i++) {
             if(langs[i]['lang-'+name]){
                 if(langs[i].element.tagName==='TITLE'){
-                    langs[i].element.innerHTML = langs[i]['lang-'+name];
+                    method = 'innerHTML';
+                }else if(langs[i].element.tagName==='IMG'){
+                    method = 'src';
                 }else{
-                    langs[i].element.nodeValue = langs[i]['lang-'+name];
+                    method='nodeValue';
                 }
+                langs[i].element[method] = langs[i]['lang-'+name];
             }
         }
     }
 }
-
 // 获取所有节点里面的注释信息
 // 返回一个数组
 function getElems(){
     // var str = document.getElementById("box").innerHTML;
     // var str1 = str.replace(/<.*>(.*)<.*>/i,"$1"); 
     // var str2 = str.replace(/^.*<!--(.*)-->.*$/,"$1");
-    var elems = getTextNodes(document);
+    var elems = Array.prototype.concat.apply(getTextNodes(document),getImgNodes(document));
     var emptyArray = [];
     var translateData = new Object();
     for (var i = 0; i < elems.length; i++) {
@@ -62,13 +64,35 @@ function serializeTitle(elm){
     return data;
 }
 
+// 处理 IMG
+function serializeIMG(elm){
+    var i=0,data = {},
+    htmlstr = elm.outerHTML,
+    imgurl = htmlstr.match(/src=\"(.*?)\"/);
+    data.element = elm;
+    data['lang-default'] = imgurl.length===2?imgurl[1]:'';
+    imgurl = htmlstr.match(/data-lang-.(\w+).\".*?\"/g)
+    if(imgurl && imgurl.length>0){
+        for (; i < imgurl.length; i++) {
+            var name = imgurl[i].replace(/data-lang-+(.*)+=\"([^\ ]*)\"/g, "$1");
+            var value = imgurl[i].match(/data-lang-+(.*)+=\"(.*?)\"/)[2]
+            console.log("value:",imgurl[i],value);
+            data['lang-' + name] = value;
+        }
+    }
+    return data;
+}
+
 // 序列化翻译数据
 function translater(elm,langData){
     langData = langData||{};
 
-    // 处理title里面的语言切换情况
     if(elm.parentElement&&elm.parentElement.tagName === 'TITLE'){
-        return serializeTitle(elm)
+        // 处理title里面的语言切换情况
+        return serializeTitle(elm);
+    }else if(elm.tagName === 'IMG'&&elm.nodeType === 1 ){
+        // 处理 IMG
+        return serializeIMG(elm);
     }
 
     var name = 'lang-default',value=elm.nodeValue,
@@ -99,6 +123,19 @@ function translater(elm,langData){
 //过滤左右的空格以及换行符
 function trim(text) {
     return "" + (null == text ? "" : (text + "").replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "").replace(/[\r\n]+/g,""));
+}
+
+var getImgNodes = function(e){
+    var i=0,result = [],imgs = e.getElementsByTagName('IMG');
+    for (; i < imgs.length; i++) {
+        if(imgs[i]
+            &&imgs[i].nodeType === 1 
+            &&imgs[i].outerHTML.match(/data-lang-.(\w+).\".*?\"/g).length>0
+        ){
+            result.push(imgs[i])
+        }
+    }
+    return result;
 }
 
 //兼容的获取文本节点的简单方案
