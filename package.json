@@ -11,12 +11,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://gitlab.maiyamall.com/wangchujiang/translate.js.git"
+    "url": "https://github.com/jaywcjlove/translater.js"
   },
-  "author": "",
+  "author": "kenny wang",
   "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-banner": "^0.1.3",
     "gulp-rename": "^1.2.2",
     "gulp-umd": "^0.2.0",
     "gulp-util": "^3.0.7",

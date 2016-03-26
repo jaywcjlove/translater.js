@@ -1,3 +1,11 @@
+/*
+ * translater.js 1.0.1
+ * Simple translation tools.
+ * 
+ * https://github.com/jaywcjlove/translater.js
+ * Copyright 2016, kenny wang
+ * Released under the MIT license.
+*/
 ;(function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     define([], factory);
