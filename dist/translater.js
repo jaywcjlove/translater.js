@@ -1,5 +1,5 @@
 /*
- * translater.js 1.0.1
+ * translater.js 1.0.2
  * Simple translation tools.
  * 
  * https://github.com/jaywcjlove/translater.js
