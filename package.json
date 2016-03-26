@@ -19,6 +19,7 @@
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
     "gulp-umd": "^0.2.0",
+    "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5"
   },
   "dependencies": {
