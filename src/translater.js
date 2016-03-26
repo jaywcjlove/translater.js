@@ -5,7 +5,7 @@ var Translater = function(option,callback){
     this.callback = callback || function(){};
     this.langs = getElems() || [];
 
-    if(option.lang !== 'default') this.setLang(option.lang);
+    if(option.lang_name&&option.lang_name !== 'default') this.setLang(option.lang_name);
 }
 
 Translater.prototype = {
