@@ -1,0 +1,146 @@
+
+body,html,ul,li{margin: 0;padding: 0;font-size: 14px; }
+body,html{height: 100%;font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",SimSun,sans-serif;}
+table{height: 100%;width: 100%;}
+a{text-decoration: none;}
+header{
+    background-color: #409D76;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+}
+.header h1{font-size: 55px;margin: 0 0 20px 0;}
+.header h1 span{font-size: 55px;color: #17533A;font-weight: bold;;}
+.btn {
+    display: inline-block;
+    padding: 4px 15px;
+    cursor: pointer;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border-radius: 4px;
+    margin: 0 5px;
+
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    transition: all .3s ease;
+}
+.btn:hover,.active{
+    background: #216F4E;
+    color: #fff;
+}
+.btn:active{
+    background: #323232;
+    color: #fff;
+}
+.describe{
+    padding: 30px 15px;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 23px;
+}
+.fork-github {position: absolute; right: 0; top: 0;z-index: 9;}
+
+.arrow{
+   
+    display:block;height:40px;
+    position:absolute;width:40px;
+    z-index:100;
+    background:url(arrow.png) no-repeat;
+    background-size:100% auto;
+    bottom:-15px;
+    left:50%;
+    margin-left:-20px;
+    -webkit-animation:touchstyle-arrow-vertical-animate 2s infinite;
+    animation:touchstyle-arrow-vertical-animate 2s infinite;
+}
+@keyframes touchstyle-arrow-vertical-animate{
+    0%{opacity:0;-webkit-transform:translateY(0);transform:translateY(0)}
+    33%,66%{opacity:.8}
+    50%{opacity:.8;-webkit-transform:translateY(-8px);transform:translateY(-8px)}
+    100%{opacity:0;-webkit-transform:translateY(-16px);transform:translateY(-16px)}
+}
+@-webkit-keyframes touchstyle-arrow-vertical-animate{
+
+    0%{opacity:0;-webkit-transform:translateY(0)}
+    33%,66%{opacity:.8}
+    50%{opacity:.8;-webkit-transform:translateY(-8px)}
+    100%{opacity:0;-webkit-transform:translateY(-16px)}
+}
+
+
+
+
+@-moz-keyframes loading {
+  0%, 100% {
+    -moz-transform: scale(1) rotateZ(0deg);
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+  }
+
+  26% {
+    -moz-transform: scale(1.1) rotateZ(12deg);
+    transform: scale(1.1) rotateZ(12deg);
+    opacity: .2;
+  }
+
+  76% {
+    -moz-transform: scale(0.8) rotateZ(-8deg);
+    transform: scale(0.8) rotateZ(-8deg);
+    opacity: .6;
+  }
+}
+@-webkit-keyframes loading {
+  0%, 100% {
+    -webkit-transform: scale(1) rotateZ(0deg);
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+  }
+
+  26% {
+    -webkit-transform: scale(1.1) rotateZ(12deg);
+    transform: scale(1.1) rotateZ(12deg);
+    opacity: .2;
+  }
+
+  76% {
+    -webkit-transform: scale(0.8) rotateZ(-8deg);
+    transform: scale(0.8) rotateZ(-8deg);
+    opacity: .6;
+  }
+}
+
+
+
+.warpper_code {
+    padding: 10px;
+    max-width: 1020px;
+    margin: 0 auto;
+}
+.warpper_code p{
+    padding: 5px 0 5px 5px;
+    line-height: 18px;
+    margin: 2px 0;
+}
+.warpper_code pre {overflow: hidden;}
+.warpper_code pre code{
+    background: #F0F0F0;
+    display: block;
+}
+.warpper_code code {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background-color: #ececec;
+    padding: 1px 5px;
+}
