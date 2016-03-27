@@ -35,6 +35,12 @@ var tran = new Translater({
 <a href="javascript:tran.setLang('cn');">中文</a> 
 ```
 
+可以通过URL穿参数设置语言
+
+```url
+http://127.0.0.1:9005/test/test.html?lang=jp
+```
+
 ## 文本翻译添加
 
 ```html
