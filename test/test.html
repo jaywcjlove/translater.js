@@ -41,7 +41,7 @@
         border-color: #ccc;
         transition: all .3s ease;
     }
-    .btn:hover{
+    .btn:hover,.active{
         background: #216F4E;
         color: #fff;
     }
@@ -68,16 +68,16 @@
         <tr>
             <td>
     <h1>Translater<span>.JS</span></h1>
-    <div>
-        <a class="btn" href="javascript:tran.setLang('default');">English</a><a 
-        class="btn" href="javascript:tran.setLang('jp');">日本語</a><a 
-        class="btn" href="javascript:tran.setLang('cn');">中文</a> 
+    <div id="btns">
+        <a class="btn active" onclick="setlang('default',this)" href="javascript:;">English</a><a 
+        class="btn" onclick="setlang('jp',this)" href="javascript:;">日本語</a><a 
+        class="btn" onclick="setlang('cn',this)" href="javascript:;">中文</a> 
     </div>
                 
     <div class="describe">
-        This is a use of HTML comments page translation solution. For a small amount of static pages, this solution is more simple. it has no dependents, Compression only (3KB)
-        <!--{jp}これはHTML注釈のページの翻訳の解決方案を利用します。少量の静的なページに対して、この解決方案はもっと簡単です。頼りなくて，圧縮後は（3kb）-->
-        <!--{cn}这是一个利用HTML注释的页面翻译解决方案。对于少量的静态页面，这种解决方案显得更简单。它没有依赖，压缩后只有(~2kb)。-->
+        This is a use of HTML comments page translation solution. For a small amount of static pages, this solution is more simple. it has no dependents, Compression only (4KB)
+        <!--{jp}これはHTML注釈のページの翻訳の解決方案を利用します。少量の静的なページに対して、この解決方案はもっと簡単です。頼りなくて，圧縮後は（~4kb）-->
+        <!--{cn}这是一个利用HTML注释的页面翻译解决方案。对于少量的静态页面，这种解决方案显得更简单。它没有依赖，压缩后只有(~4kb)。-->
     </div> 
             </td>
         </tr>
@@ -90,7 +90,30 @@
 <script type="text/javascript" src="../dist/translater.js"></script>
 <script type="text/javascript">
     var tran = new Translater();
-    console.log("tran:",tran);
+
+    var btns = document.getElementById('btns');
+
+    for (var i = 0; i < btns.childNodes.length; i++) {
+        var  str = btns.childNodes[i].outerHTML;
+        if(str){
+            str = str.match(/onclick=\"setlang\(\'(.*?)\'\,/);
+
+            if(str.length>1 && str[1] === tran.lang_name){
+                btns.childNodes[i].className = 'btn active'
+            }else{
+                btns.childNodes[i].className = 'btn'
+            }
+        }
+    }
+
+    function setlang(name,self){
+        tran.setLang(name);
+        var btns = self.parentNode.children;
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].className = 'btn';
+        }
+        self.className = 'btn active';
+    }
 </script>
 
 </body>

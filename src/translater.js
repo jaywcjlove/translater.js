@@ -1,11 +1,25 @@
 var Translater = function(option,callback){
     // 默认给URL参数 ?lang=en
-    this.lang_name = (option && option.lang) || 'default';
+    option = option || {};
+    if(getUrlParam("lang")){
+        // console.log("222");
+        option.lang = getUrlParam("lang");  
+    } 
+
+    console.log(option)
+    if(option.lang) {
+        console.log("wwww");
+        setCookie('t-lang',option.lang,24);
+        this.lang_name = option.lang;
+    }else{
+        this.lang_name = "default";
+    }
     // 回调函数
     this.callback = callback || function(){};
     this.langs = getElems() || [];
-
-    if(option&&option.lang !== 'default') this.setLang(option.lang);
+    if(this.lang_name !== 'default') this.setLang(option.lang);
+    var lang = getCookie('t-lang');
+    lang && lang !== 'default' && ( this.setLang(lang) );
 }
 
 Translater.prototype = {
@@ -24,8 +38,36 @@ Translater.prototype = {
                 langs[i].element[method] = langs[i]['lang-'+name];
             }
         }
+        setCookie('t-lang',name,24);
     }
 }
+
+//获取 COOKIE
+function getCookie(name){
+    var nameEQ = name + "=";    
+    var ca = document.cookie.split(';');//把cookie分割成组    
+    for(var i=0;i < ca.length;i++) {    
+        var c = ca[i];//取得字符串    
+        while (c.charAt(0)==' ') {//判断一下字符串有没有前导空格    
+            c = c.substring(1,c.length);//有的话，从第二位开始取    
+        }    
+        if (c.indexOf(nameEQ) == 0) {//如果含有我们要的name    
+            return unescape(c.substring(nameEQ.length,c.length));//解码并截取我们要值    
+        }    
+    }    
+    return false;
+}
+
+//设置 COOKIE
+function setCookie(name, value, hours) {
+    var date = new Date();
+    date.setTime(date.getTime() + Number(hours) * 3600 * 1000);
+    document.cookie = name 
+        + "=" + value 
+        + "; path=/;expires = " 
+        + date.toGMTString();
+}
+
 // 获取所有节点里面的注释信息
 // 返回一个数组
 function getElems(){
@@ -122,6 +164,23 @@ function translater(elm,langData){
 //过滤左右的空格以及换行符
 function trim(text) {
     return "" + (null == text ? "" : (text + "").replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "").replace(/[\r\n]+/g,""));
+}
+
+
+function getUrlParam(name, searchStr) {
+    // 兼容 ?id=22&name=%E4%B8%AD%E6%96%87&DEBUG 处理
+    var url = searchStr || location.search;
+    var params = {};
+
+    if (url.indexOf('?') != -1) {
+        var arr = url.substr(1).split('&');
+        for(var i = 0, l = arr.length; i < l; i ++) {
+            var kv = arr[i].split('=');
+            params[kv[0]] = kv[1] && decodeURIComponent(kv[1]); // 有值解码，无值 undefined
+        }
+    }
+
+    return name ? params[name] : params;
 }
 
 var getImgNodes = function(e){
