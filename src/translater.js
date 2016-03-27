@@ -206,6 +206,7 @@ var getTextNodes = window.NodeFilter?function(e){
     while(o=s.nextNode()){
       if(o.parentElement.tagName !== 'SCRIPT' 
         && o.parentElement.tagName !== 'STYLE'
+        && o.parentElement.tagName !== 'CODE'
         && trim(o.nodeValue) !== ''
         ) {
           r.push(o); //遍历迭代器
@@ -220,7 +221,10 @@ var getTextNodes = window.NodeFilter?function(e){
       case 1:;case 9: 
         //文档或元素需要遍历子节点
         var i,s=e.childNodes,result=[];
-        if(e.tagName!== 'SCRIPT' && e.tagName!== 'STYLE' && trim(o.nodeValue) !== ''){
+        if(e.tagName!== 'SCRIPT' 
+            && e.tagName!== 'STYLE' 
+            && e.tagName!== 'CODE' 
+            && trim(o.nodeValue) !== ''){
             for(i=0;i<s.length;i++)
             getTextNodes(s[i]) && result.push(getTextNodes(s[i]));
             //合并子数组   
