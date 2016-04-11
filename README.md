@@ -59,3 +59,15 @@ http://127.0.0.1:9005/test/test.html?lang=jp
 ```html 
 <img alt="images" src="../img/imgae.jpg" data-lang-cn="../img/imgae_cn.jpg" data-lang-jp="../img/imgae_jp.jpg" />
 ```
+
+
+## getLang/setLang
+
+获取或设置当前语言。
+
+```html
+<script type="text/javascript">
+    var tran = new Translater();
+    if (tran.getLang() === "default") tran.setLang('en');
+</script>
+```
