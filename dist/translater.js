@@ -19,13 +19,9 @@ var Translater = function(option,callback){
     // 默认给URL参数 ?lang=en
     option = option || {};
     if(getUrlParam("lang")){
-        // console.log("222");
         option.lang = getUrlParam("lang");  
     } 
-
-    console.log(option)
     if(option.lang) {
-        console.log("wwww");
         setCookie('t-lang',option.lang,24);
         this.lang_name = option.lang;
     }else{
@@ -56,6 +52,9 @@ Translater.prototype = {
             }
         }
         setCookie('t-lang',name,24);
+    },
+    getLang:function() {
+	   return this.lang_name;
     }
 }
 
