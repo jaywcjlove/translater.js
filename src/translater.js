@@ -39,6 +39,9 @@ Translater.prototype = {
             }
         }
         setCookie('t-lang',name,24);
+    },
+    getLang:function() {
+	return this.lang_name;
     }
 }
 
