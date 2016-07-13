@@ -57,5 +57,5 @@ http://127.0.0.1:9005/test/test.html?lang=jp
 ## 图片切换
 
 ```html 
-<img alt="images" src="../img/imgae.jpg" data-lang-cn="../img/imgae_cn.jpg" data-lang-jp="../img/imgae_jp.jpg" />
+<img alt="images" src="../img/image.jpg" data-lang-cn="../img/image_cn.jpg" data-lang-jp="../img/image_jp.jpg" />
 ```
