@@ -8,6 +8,8 @@
 - 支持 URL 加载语言
 - 支持本地缓存选择
 
+![translater.js 动画效果](translater.js.gif)
+
 # 作为模块安装
 
 ```bash
@@ -32,10 +34,10 @@ var tran = new Translater({
 
 切换语言方法通过超链接
 
-```html 
+```html
 <a href="javascript:tran.setLang('default');">English</a>
 <a href="javascript:tran.setLang('jp');">日本語</a>
-<a href="javascript:tran.setLang('cn');">中文</a> 
+<a href="javascript:tran.setLang('cn');">中文</a>
 ```
 
 可以通过URL穿参数设置语言
@@ -56,7 +58,7 @@ http://127.0.0.1:9005/test/test.html?lang=jp
 
 ## 图片切换
 
-```html 
+```html
 <img alt="images" src="../img/image.jpg" data-lang-cn="../img/image_cn.jpg" data-lang-jp="../img/image_jp.jpg" />
 ```
 
