@@ -1,6 +1,6 @@
 {
   "name": "translater.js",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Simple translation tools.",
   "main": "dist/translater.min.js",
   "directories": {
