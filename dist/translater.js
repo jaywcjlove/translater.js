@@ -1,11 +1,11 @@
 /*!
- * translater.js v1.0.6
- * Copyright (c) 2016 kenny wang
- * Licensed under the MIT license.
- * 
+ * translater.js v1.0.7
  * Simple translation tools.
+ * 
+ * Copyright (c) 2016 kenny wang
  * https://github.com/jaywcjlove/translater.js
  * 
+ * Licensed under the MIT license.
  */
 (function(f) {
     if (typeof exports === "object" && typeof module !== "undefined") {
@@ -230,4 +230,5 @@
             }
         }
     };
+    return Translater;
 });
