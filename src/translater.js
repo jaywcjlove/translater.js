@@ -231,3 +231,5 @@ var getTextNodes = window.NodeFilter?function(e){
         }
     };
 };
+
+return Translater;
