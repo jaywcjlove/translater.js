@@ -1,7 +1,6 @@
 # translater.js
 
-[![](https://jaywcjlove.github.io/sb/ico/npm.svg)](https://www.npmjs.com/package/translater.js) [![](http://jaywcjlove.github.io/sb/status/no-dependencies.svg)](#) [![](http://jaywcjlove.github.io/sb/status/stable.svg)](#) [![](https://jaywcjlove.github.io/sb/license/mit.svg)](#) [![jaywcjlove/sb](https://jaywcjlove.github.io/sb/lang/chinese.svg)](https://jaywcjlove.github.io/translater.js/?lang=cn) [![jaywcjlove/sb](https://jaywcjlove.github.io/sb/lang/english.svg)](https://jaywcjlove.github.io/translater.js/?lang=en)
-
+[![](https://jaywcjlove.github.io/sb/ico/npm.svg)](https://www.npmjs.com/package/translater.js) [![](http://jaywcjlove.github.io/sb/status/no-dependencies.svg)](#) [![](http://jaywcjlove.github.io/sb/status/stable.svg)](#) [![](https://jaywcjlove.github.io/sb/license/mit.svg)](#) [![jaywcjlove/sb](https://jaywcjlove.github.io/sb/lang/chinese.svg)](https://jaywcjlove.github.io/translater.js/?lang=cn) [![jaywcjlove/sb](https://jaywcjlove.github.io/sb/lang/english.svg)](https://jaywcjlove.github.io/translater.js/?lang=en) [![CDNJS version](https://img.shields.io/cdnjs/v/translater.js.svg)](https://cdnjs.com/libraries/translater.js)
 
 这是一个利用HTML注释的页面翻译解决方案。对于少量的静态页面，这种解决方案显得更简单。它没有依赖，压缩只有只有(~2kb)。
 
