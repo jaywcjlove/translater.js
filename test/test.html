@@ -61,7 +61,22 @@
 </head>
 <body>
 
-<img alt="images" src="../img/imgae.jpg" data-lang-cn="../img/imgae_cn.jpg" data-lang-jp="../img/imgae_jp.jpg" />
+<img 
+    alt="image" 
+    alt-cn="图片" 
+    alt-jp="画像" 
+    
+    title="image2" 
+    title-cn="图片2" 
+    title-jp="画像2" 
+
+    src="../img/imgae.jpg" 
+    data-lang-cn="../img/imgae_cn.jpg" 
+    data-lang-jp="../img/imgae_jp.jpg"/>
+
+
+<input type="text" placeholder="like this?"  placeholder-cn="像这样？"  />
+<input type="button" value="button" value-cn="按钮" value-jp="按钮日本"  />
 
 <header>
 <table class="header">
@@ -90,7 +105,7 @@
 
 <script type="text/javascript" src="../dist/translater.js"></script>
 <script type="text/javascript">
-    var tran = new Translater();
+    var Translater = new Translater();
 
     var btns = document.getElementById('btns');
 
@@ -98,8 +113,7 @@
         var  str = btns.childNodes[i].outerHTML;
         if(str){
             str = str.match(/onclick=\"setlang\(\'(.*?)\'\,/);
-
-            if(str.length>1 && str[1] === tran.lang_name){
+            if(str.length>1 && str[1] === Translater.lang_name){
                 btns.childNodes[i].className = 'btn active'
             }else{
                 btns.childNodes[i].className = 'btn'
@@ -108,7 +122,7 @@
     }
 
     function setlang(name,self){
-        tran.setLang(name);
+        Translater.setLang(name);
         var btns = self.parentNode.children;
         for (var i = 0; i < btns.length; i++) {
             btns[i].className = 'btn';
