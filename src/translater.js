@@ -19,19 +19,23 @@ var Translater = function(option,callback){
 }
 
 Translater.prototype = {
-    setLang:function(name){
-        var langs = this.langs,method='';
+    setLang:function(name,elms){
+        var langs = elms || this.langs,method='';
         this.lang_name = name;
         for (var i = 0; i < langs.length; i++) {
-            if(langs[i]['lang-'+name]){
+            if(langs[i]['lang-'+name] || langs[i][name]){
                 if(langs[i].element.tagName==='TITLE'){
                     method = 'innerHTML';
                 }else if(langs[i].element.tagName==='IMG'){
-                    method = 'src';
+                    method = langs[i]['type'];
+                }else if(langs[i].element.tagName==='INPUT'){
+                    method = langs[i]['type'];
                 }else{
                     method='nodeValue';
                 }
-                langs[i].element[method] = langs[i]['lang-'+name];
+                langs[i].element[method] = langs[i]['lang-'+name ] || langs[i][name];
+            }else{
+                this.setLang(name,langs[i])
             }
         }
         setCookie('t-lang',name,24);
@@ -73,17 +77,15 @@ function getElems(){
     // var str = document.getElementById("box").innerHTML;
     // var str1 = str.replace(/<.*>(.*)<.*>/i,"$1"); 
     // var str2 = str.replace(/^.*<!--(.*)-->.*$/,"$1");
-    var elems = Array.prototype.concat.apply(getTextNodes(document),getImgNodes(document));
+    var elems = Array.prototype.concat(getTextNodes(document),getNodes(document,'IMG'),getNodes(document,'INPUT'));
     var emptyArray = [];
     var translateData = new Object();
     for (var i = 0; i < elems.length; i++) {
-        elems[i].nodeValue = trim(elems[i].nodeValue)
-        if(elems[i].nodeValue !== ''){
-            translateData = translater(elems[i])
-
-            if(Object.getOwnPropertyNames(translateData).length>2)
-                emptyArray.push( translateData );
-        };
+        translateData = translater(elems[i]);
+        var mTran= Object.getOwnPropertyNames(translateData)
+        if((mTran.length>=2&&mTran[0]=='0')  || mTran.length>2){
+            emptyArray.push( translateData );
+        }       
     }
     return emptyArray;
 }
@@ -107,20 +109,47 @@ function serializeTitle(elm){
 
 // 处理 IMG
 function serializeIMG(elm){
-    var i=0,data = {},
-    htmlstr = elm.outerHTML,
-    imgurl = htmlstr.match(/src=\"(.*?)\"/);
-    data.element = elm;
-    data['lang-default'] = imgurl.length===2?imgurl[1]:'';
-    imgurl = htmlstr.match(/data-lang-.(\w+).\".*?\"/g);
-    if(imgurl && imgurl.length>0){
-        for (; i < imgurl.length; i++) {
-            var name = imgurl[i].match(/data-lang-(.*?)=/, "$1")[1];
-            var value = imgurl[i].match(/data-lang-(.*?)=\"(.*?)\"/, "$1")[2];
-            data['lang-' + name] = value;
+    var i=0,trans = [];
+    var htmlstr = elm.outerHTML;
+
+    var imgurl = htmlstr.match(/src=\"(.*?)\"/);
+    var alt = htmlstr.match(/alt=\"(.*?)\"/);
+    var title = htmlstr.match(/title=\"(.*?)\"/);
+    var placeholder = htmlstr.match(/placeholder=\"(.*?)\"/);
+    var value = htmlstr.match(/value=\"(.*?)\"/);
+
+    var processing = function(proce,_type,_mark){
+        var data = {}
+        var regm = new RegExp(_mark+'.(\\w+).\\".*?\\"','g');
+        var regname = new RegExp(_mark+'(.*?)=')
+        var regval = new RegExp(_mark+'(.*?)=\\"(.*?)\\"')
+        data.element = elm;
+        data['default'] = proce.length===2?proce[1]:'';
+        proce = htmlstr.match(regm);
+        if(proce && proce.length>0){
+            for (i=0; i < proce.length; i++) {
+                data[proce[i].match(regname, "$1")[1]] = proce[i].match(regval, "$1")[2];
+                data['type'] = _type;
+            }
         }
+        return data;
     }
-    return data;
+    if(imgurl){
+        trans.push(processing(imgurl,'src','data-lang-'));
+    }
+    if(alt){
+        trans.push(processing(alt,'alt','alt-'));
+    }
+    if(title){
+        trans.push(processing(title,'title','title-'));
+    }
+    if(placeholder){
+        trans.push(processing(placeholder,'placeholder','placeholder-'));
+    }
+    if(value){
+        trans.push(processing(value,'value','value-'));
+    }
+    return trans;
 }
 
 // 序列化翻译数据
@@ -132,6 +161,9 @@ function translater(elm,langData){
         return serializeTitle(elm);
     }else if(elm.tagName === 'IMG'&&elm.nodeType === 1 ){
         // 处理 IMG
+        return serializeIMG(elm);
+    }else if(elm.tagName === 'INPUT'&&elm.nodeType === 1 ){
+        // 处理 INPUT
         return serializeIMG(elm);
     }
 
@@ -178,22 +210,12 @@ function getUrlParam(name, searchStr) {
             params[kv[0]] = kv[1] && decodeURIComponent(kv[1]); // 有值解码，无值 undefined
         }
     }
-
     return name ? params[name] : params;
 }
 
-var getImgNodes = function(e){
-    var i=0,result = [],imgs = e.getElementsByTagName('IMG');
-    for (; i < imgs.length; i++) {
-        var img_match = imgs[i].outerHTML.match(/data-lang-.(\w+).\".*?\"/g);
-        if(imgs[i]
-            &&imgs[i].nodeType === 1 
-            &&img_match
-            &&img_match.length>0
-        ){
-            result.push(imgs[i])
-        }
-    }
+function getNodes(e,_tagName){
+    var i=0,result = [],doms = e.getElementsByTagName(_tagName);
+    for (; i < doms.length; i++) result.push(doms[i])
     return result;
 }
 
@@ -224,7 +246,7 @@ var getTextNodes = window.NodeFilter?function(e){
             && e.tagName!== 'STYLE' 
             && e.tagName!== 'CODE' 
             && trim(o.nodeValue) !== ''){
-            for(i=0;i<s.length;i++)
+            for(i=0;i < s.length;i++)
             getTextNodes(s[i]) && result.push(getTextNodes(s[i]));
             //合并子数组   
             return Array.prototype.concat.apply([],result); 
