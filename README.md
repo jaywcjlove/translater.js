@@ -46,7 +46,7 @@ var tran = new Translater({
 http://127.0.0.1:9005/test/test.html?lang=jp
 ```
 
-## 文本翻译添加
+## Text
 
 ```html
 <div>
@@ -56,12 +56,29 @@ http://127.0.0.1:9005/test/test.html?lang=jp
 </div>
 ```
 
-## 图片切换
+## Image
 
 ```html
-<img alt="images" src="../img/image.jpg" data-lang-cn="../img/image_cn.jpg" data-lang-jp="../img/image_jp.jpg" />
+<img 
+    alt="image" 
+    alt-cn="图片" 
+    alt-jp="画像" 
+    
+    title="image2" 
+    title-cn="图片2" 
+    title-jp="画像2" 
+
+    src="../img/imgae.jpg" 
+    data-lang-cn="../img/imgae_cn.jpg" 
+    data-lang-jp="../img/imgae_jp.jpg"/>
 ```
 
+## Input
+
+```html
+<input type="text" placeholder="like this?"  placeholder-cn="像这样？"  />
+<input type="button" value="button" value-cn="按钮" value-jp="按钮日本"  />
+```
 
 ## getLang/setLang
 
@@ -73,3 +90,4 @@ http://127.0.0.1:9005/test/test.html?lang=jp
     if (tran.getLang() === "default") tran.setLang('en');
 </script>
 ```
+
