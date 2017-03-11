@@ -1,6 +1,6 @@
 {
   "name": "translater.js",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Simple translation tools.",
   "main": "dist/translater.min.js",
   "directories": {
@@ -11,7 +11,7 @@
     "build:min": "umd Translater src/translater.js | uglifyjs -mc | bannerjs -o > dist/translater.min.js",
     "build:dist": "umd Translater src/translater.js | bannerjs -m | uglifyjs -b beautify=true --comments 'all' > dist/translater.js ",
     "build": "npm run build:min && npm run build:dist",
-    "watch": "onchange 'src/store.js' -v -- npm run build"
+    "watch": "onchange 'src/translater.js' -v -- npm run build"
   },
   "repository": {
     "type": "git",
