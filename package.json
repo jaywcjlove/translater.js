@@ -1,8 +1,9 @@
 {
   "name": "translater.js",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Simple translation tools.",
   "main": "dist/translater.min.js",
+  "homepage": "http://jaywcjlove.github.io/translater.js/",
   "directories": {
     "test": "test"
   },
@@ -17,7 +18,7 @@
     "type": "git",
     "url": "https://github.com/jaywcjlove/translater.js"
   },
-  "author": "kenny wang",
+  "author": "kenny wong <wowohoo@qq.com>",
   "license": "MIT",
   "devDependencies": {
     "bannerjs": "^1.0.1",
