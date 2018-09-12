@@ -1,5 +1,5 @@
 /*!
- * translater.js v1.0.11
+ * translater.js v1.0.12
  * Simple translation tools.
  * 
  * Copyright (c) 2018 kenny wong <wowohoo@qq.com>
