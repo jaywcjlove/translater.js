@@ -1,9 +1,9 @@
 /*!
- * translater.js v1.0.9
+ * translater.js v1.0.11
  * Simple translation tools.
  * 
- * Copyright (c) 2017 kenny wang
- * https://github.com/jaywcjlove/translater.js
+ * Copyright (c) 2018 kenny wong <wowohoo@qq.com>
+ * http://jaywcjlove.github.io/translater.js/
  * 
  * Licensed under the MIT license.
  */
