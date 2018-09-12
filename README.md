@@ -28,7 +28,7 @@ Or manually download and link **[translater.js](https://unpkg.com/translater.js/
   <!--{jp}ここは日本語です-->
   <!--{en}Here is English-->
 </div>
-<script src="../dist/translater.min.js" type="text/javascript"></script>
+<script src="https://unpkg.com/translater.js/dist/translater.js" type="text/javascript"></script>
 <script type="text/javascript">
 var tran = new Translater({
   lang:"jp"
