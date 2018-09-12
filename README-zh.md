@@ -2,15 +2,15 @@
 
 [![](https://jaywcjlove.github.io/sb/ico/npm.svg)](https://www.npmjs.com/package/translater.js) [![](http://jaywcjlove.github.io/sb/status/no-dependencies.svg)](#) [![](http://jaywcjlove.github.io/sb/status/stable.svg)](#) [![](https://jaywcjlove.github.io/sb/license/mit.svg)](#) [![jaywcjlove/sb](https://jaywcjlove.github.io/sb/lang/chinese.svg)](https://jaywcjlove.github.io/translater.js/?lang=cn) [![jaywcjlove/sb](https://jaywcjlove.github.io/sb/lang/english.svg)](https://jaywcjlove.github.io/translater.js/?lang=en) [![CDNJS version](https://img.shields.io/cdnjs/v/translater.js.svg)](https://cdnjs.com/libraries/translater.js)
 
-♣︎ This is a use of HTML comments page translation solution. For a small amount of static pages, this solution is more simple. it has no dependents, Compression only (~2KB) Official document [demo preview](http://jaywcjlove.github.io/translater.js/).
+这是一个利用HTML注释的页面翻译解决方案。对于少量的静态页面，这种解决方案显得更简单。它没有依赖，压缩只有只有(~2kb)。官方文档 [实例预览](http://jaywcjlove.github.io/translater.js/).
 
-- Support `IMG``text` switching
-- Support `URL` parameter switching language
-- Support local cache selection
+- 支持 `IMG` `文本` 切换
+- 支持 URL 加载语言
+- 支持本地缓存选择
 
 ![translater.js 动画效果](translater.js.gif)
 
-## Usage
+## 安装
 
 ```bash
 $ npm install translater.js
@@ -20,7 +20,7 @@ $ npm install translater.js
 import 'translater.js';
 ```
 
-Or manually download and link **[translater.js](https://unpkg.com/translater.js/dist/)** in your HTML, It can also be downloaded via [UNPKG](https://unpkg.com/translater.js/dist/):
+或者手动下载并在HTML中链接 **[translater.js](https://unpkg.com/translater.js/dist/)**，也可以通过 [UNPKG](https://unpkg.com/translater.js/dist/) 下载：
 
 ```html
 <div>
@@ -28,7 +28,7 @@ Or manually download and link **[translater.js](https://unpkg.com/translater.js/
   <!--{jp}ここは日本語です-->
   <!--{en}Here is English-->
 </div>
-<script src="../dist/translater.min.js" type="text/javascript"></script>
+<script src="https://unpkg.com/translater.js/dist/translater.js" type="text/javascript"></script>
 <script type="text/javascript">
 var tran = new Translater({
   lang:"jp"
@@ -36,7 +36,7 @@ var tran = new Translater({
 </script>
 ```
 
-The method of switching languages via hyperlinks.
+切换语言方法通过超链接
 
 ```html
 <a href="javascript:tran.setLang('default');">English</a>
@@ -44,15 +44,13 @@ The method of switching languages via hyperlinks.
 <a href="javascript:tran.setLang('cn');">中文</a>
 ```
 
-You can set the language parameter passed through URL.
+可以通过URL穿参数设置语言
 
 ```url
 http://127.0.0.1:9005/test/test.html?lang=jp
 ```
 
-## API
-
-**Adding text translation**
+## Text
 
 ```html
 <div>
@@ -62,7 +60,7 @@ http://127.0.0.1:9005/test/test.html?lang=jp
 </div>
 ```
 
-**Picture switch**
+## Image
 
 ```html
 <img 
@@ -80,16 +78,16 @@ http://127.0.0.1:9005/test/test.html?lang=jp
 />
 ```
 
-**Input**
+## Input
 
 ```html
 <input type="text" placeholder="like this?"  placeholder-cn="像这样？"  />
 <input type="button" value="button" value-cn="按钮" value-jp="按钮日本"  />
 ```
 
-**getLang/setLang**
+## getLang/setLang
 
-Get or set the current languge.
+获取或设置当前语言。
 
 ```html
 <script type="text/javascript">
