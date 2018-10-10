@@ -135,13 +135,12 @@ Get or set the current languge.<!--{cn}获取或设置当前语言。--><!--{jp}
 </div>
 
 
-<script type="text/javascript" src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script type="text/javascript" src="//unpkg.com/highlight.js@9.12.0/lib/highlight.js"></script>
 <script type="text/javascript" src="translater.js"></script>
 <script type="text/javascript">
 hljs.initHighlightingOnLoad();
 
     var tran = new Translater();
-
     var btns = document.getElementById('btns');
 
     for (var i = 0; i < btns.childNodes.length; i++) {
