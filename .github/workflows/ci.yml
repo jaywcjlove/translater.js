@@ -1,0 +1,55 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm install
+      - run: npm run build
+      - run: tree -I 'node_modules|.git|.github|src' -L 3 -a
+      - name: Is a tag created auto?
+        id: create_tag
+        uses: jaywcjlove/create-tag-action@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate Changelog
+        id: changelog
+        uses: jaywcjlove/changelog-generator@main
+        if: steps.create_tag.outputs.successful
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          head-ref: ${{ steps.create_tag.outputs.version }}
+          filter-author: (小弟调调™|Renovate Bot)
+          filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
+
+      - run: npm publish --access public
+        continue-on-error: true
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        if: steps.create_tag.outputs.successful
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ steps.create_tag.outputs.version }}
+          tag: ${{ steps.create_tag.outputs.version }}
+          body: |
+            [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/translater.js@${{steps.create_tag.outputs.versionNumber}}/file/README.md)
+            
+            ```bash
+            npm i translater.js@${{steps.create_tag.outputs.versionNumber}}
+            ```
+            ${{ steps.changelog.outputs.compareurl }}
+            
+            ${{ steps.changelog.outputs.changelog }}
