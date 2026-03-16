@@ -1,3 +1,16 @@
-node_modules/
+node_modules
+npm-debug.log*
+package-lock.json
 npm-debug.log
+
+.eslintcache
 .DS_Store
+.cache
+.vscode
+
+*.bak
+*.tem
+*.temp
+#.swp
+*.*~
+~*.*
