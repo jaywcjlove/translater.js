@@ -9,21 +9,20 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:min": "umd Translater src/translater.js | uglifyjs -mc | bannerjs -o > dist/translater.min.js",
-    "build:dist": "umd Translater src/translater.js | bannerjs -m | uglifyjs -b beautify=true --comments 'all' > dist/translater.js ",
-    "build": "npm run build:min && npm run build:dist",
-    "watch": "onchange 'src/translater.js' -v -- npm run build"
+    "build:min": "rollup -c rollup.config.mjs --environment MINIFY:true",
+    "build:dist": "rollup -c rollup.config.mjs",
+    "build": "npm run build:dist && npm run build:min",
+    "watch": "rollup -c rollup.config.mjs -w",
+    "watch:min": "rollup -c rollup.config.mjs --environment MINIFY:true -w"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jaywcjlove/translater.js"
+    "url": "git+https://github.com/jaywcjlove/translater.js.git"
   },
   "author": "kenny wong <wowohoo@qq.com>",
   "license": "MIT",
   "devDependencies": {
-    "bannerjs": "^1.0.1",
-    "onchange": "^2.4.0",
-    "uglify-js": "^2.6.2",
-    "umd": "^3.0.1"
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.41.1"
   }
 }

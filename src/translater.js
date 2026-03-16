@@ -254,4 +254,4 @@ var getTextNodes = window.NodeFilter?function(e){
     };
 };
 
-return Translater;
+export default Translater;
