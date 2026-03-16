@@ -42,8 +42,6 @@
 [![Follow On X](https://img.shields.io/badge/Follow%20on%20X-333333?logo=x&logoColor=white)](https://x.com/jaywcjlove) 
 [![NPM version](https://img.shields.io/npm/v/translater.js.svg)](https://www.npmjs.com/package/translater.js)
 [![](http://jaywcjlove.github.io/sb/status/no-dependencies.svg)](#)
-[![](http://jaywcjlove.github.io/sb/status/stable.svg)](#)
-[![](https://jaywcjlove.github.io/sb/license/mit.svg)](#)
 [![Chinese](https://jaywcjlove.github.io/sb/lang/chinese.svg)](https://jaywcjlove.github.io/translater.js/?lang=cn)
 [![English](https://jaywcjlove.github.io/sb/lang/english.svg)](https://jaywcjlove.github.io/translater.js/?lang=en)
 [![CDNJS version](https://img.shields.io/cdnjs/v/translater.js.svg)](https://cdnjs.com/libraries/translater.js)
