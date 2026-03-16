@@ -40,12 +40,12 @@
 
 [![Buy me a coffee](https://img.shields.io/badge/Buy_Me_a_Coffee-ffdd00?logo=buy-me-a-coffee&logoColor=black)](https://jaywcjlove.github.io/#/sponsor) 
 [![Follow On X](https://img.shields.io/badge/Follow%20on%20X-333333?logo=x&logoColor=white)](https://x.com/jaywcjlove) 
-[![](https://jaywcjlove.github.io/sb/ico/npm.svg)](https://www.npmjs.com/package/translater.js)
+[![NPM version](https://img.shields.io/npm/v/translater.js.svg)](https://www.npmjs.com/package/translater.js)
 [![](http://jaywcjlove.github.io/sb/status/no-dependencies.svg)](#)
 [![](http://jaywcjlove.github.io/sb/status/stable.svg)](#)
 [![](https://jaywcjlove.github.io/sb/license/mit.svg)](#)
-[![jaywcjlove/sb](https://jaywcjlove.github.io/sb/lang/chinese.svg)](https://jaywcjlove.github.io/translater.js/?lang=cn)
-[![jaywcjlove/sb](https://jaywcjlove.github.io/sb/lang/english.svg)](https://jaywcjlove.github.io/translater.js/?lang=en)
+[![Chinese](https://jaywcjlove.github.io/sb/lang/chinese.svg)](https://jaywcjlove.github.io/translater.js/?lang=cn)
+[![English](https://jaywcjlove.github.io/sb/lang/english.svg)](https://jaywcjlove.github.io/translater.js/?lang=en)
 [![CDNJS version](https://img.shields.io/cdnjs/v/translater.js.svg)](https://cdnjs.com/libraries/translater.js)
 
 ♣︎ This is a use of HTML comments page translation solution. For a small amount of static pages, this solution is more simple. it has no dependents, Compression only (~2KB) Official document [demo preview](http://jaywcjlove.github.io/translater.js/).
